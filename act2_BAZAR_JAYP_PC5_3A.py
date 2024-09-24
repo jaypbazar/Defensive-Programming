@@ -1,7 +1,20 @@
 import os
 
 class Product:
+    '''
+    This class represents a product to be added in a shopping cart.
 
+    Attributes:
+        name (string) - the name of the product
+        price (double) - the price of the product
+        quantity (integer) - the quantity of the product
+
+    Methods:
+        get_name - returns the name of the product
+        get_price - returns the rounded price of the product
+        get_quantity - returns the quantity of the product
+
+    '''
     # NOTE: added new attribute 'quantity'
     def __init__(self, name, price, quantity):
         self.name = name
@@ -16,18 +29,40 @@ class Product:
         return self.name
     
     def get_price(self):
-        return self.price
+        return round(self.price, 2)
     
     def get_quantity(self):
         return self.quantity
 
 class ShoppingCart:
+    '''
+    This class represents a shopping cart that you can add, view, and purchase products,
+
+    Attributes:
+        user_balance (double) - the current balance of the user
+        products (list) - the list of all the products 
+
+    Methods:
+        add_product - adds a product to the list of products
+        list_products - displays all the products in the list
+        purchase_product - purchase from the list of products
+        get_user_balance - returns the current balance
+        get_list_length - returns the number of items in the cart
+        increase_balance - adds additional balance to the current balance
     
+    '''
     def __init__(self, balance):
         self.user_balance = balance
         self.products = []
 
     def add_product(self, product):
+        '''
+        Adds a product to the list of products.
+
+        Parameters:
+            product (object) - instance of the Product class
+
+        '''
         self.products.append(product)
 
     def list_products(self):
@@ -38,6 +73,13 @@ class ShoppingCart:
                 print(f"{i+1}. {self.products[i]}")
 
     def purchase_product(self, index):
+        '''
+        Purchase from the list of products.
+
+        Parameters:
+            index (integer) - the number of the product in the list 
+
+        '''
         name = self.products[index].get_name()
         quantity = self.products[index].get_quantity()
         price = self.products[index].get_price()
@@ -63,6 +105,13 @@ class ShoppingCart:
         return len(self.products) if self.products is not None else 0
     
     def increase_balance(self, added_balance):
+        '''
+        Adds additional balance to the current balance.
+
+        Parameters:
+            added_balance (double) - balance added to the current balance
+        
+        '''
         self.user_balance += added_balance
 
 
@@ -97,6 +146,7 @@ def display(message_type):
         case "error message #4":
             print("\nQuantity must be a positive integer!")
 
+# NOTE: new function added to validate input for adding balance
 def add_balance():
     while 1:
         try: 
